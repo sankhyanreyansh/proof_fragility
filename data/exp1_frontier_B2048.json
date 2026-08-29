@@ -1,0 +1,3043 @@
+{
+  "token_budget": 2048,
+  "tau_fallback": 0.5,
+  "total_evaluated": 103,
+  "summary_results": {
+    "Whole-Proof Restart (j=0)": {
+      "solved": 91,
+      "total_evaluated": 103,
+      "solve_rate": 88.3495145631068,
+      "solve_rate_ci_95": [
+        81.55339805825243,
+        94.1747572815534
+      ],
+      "total_tokens": 70213,
+      "avg_tokens_per_target": 681.6796116504854,
+      "tokens_per_solve": 771.5714285714286
+    },
+    "Compiler Error Line Branch": {
+      "solved": 37,
+      "total_evaluated": 103,
+      "solve_rate": 35.922330097087375,
+      "solve_rate_ci_95": [
+        26.189320388349536,
+        44.66019417475728
+      ],
+      "total_tokens": 144096,
+      "avg_tokens_per_target": 1398.990291262136,
+      "tokens_per_solve": 3894.4864864864867
+    },
+    "Learned XGBoost Fragility Branch": {
+      "solved": 88,
+      "total_evaluated": 103,
+      "solve_rate": 85.4368932038835,
+      "solve_rate_ci_95": [
+        78.64077669902913,
+        91.28640776699028
+      ],
+      "total_tokens": 72528,
+      "avg_tokens_per_target": 704.1553398058253,
+      "tokens_per_solve": 824.1818181818181
+    },
+    "Oracle Prefix Branch (j=i*-1)": {
+      "solved": 85,
+      "total_evaluated": 103,
+      "solve_rate": 82.52427184466019,
+      "solve_rate_ci_95": [
+        74.75728155339806,
+        90.29126213592232
+      ],
+      "total_tokens": 72157,
+      "avg_tokens_per_target": 700.5533980582525,
+      "tokens_per_solve": 848.9058823529411
+    }
+  },
+  "horizon_breakdown": {
+    "Short (2–4 steps)": {
+      "count": 47,
+      "policies": {
+        "Whole-Proof Restart (j=0)": {
+          "solved": 43,
+          "total": 47,
+          "solve_rate": 91.48936170212765
+        },
+        "Compiler Error Line Branch": {
+          "solved": 15,
+          "total": 47,
+          "solve_rate": 31.914893617021278
+        },
+        "Learned XGBoost Fragility Branch": {
+          "solved": 40,
+          "total": 47,
+          "solve_rate": 85.1063829787234
+        },
+        "Oracle Prefix Branch (j=i*-1)": {
+          "solved": 39,
+          "total": 47,
+          "solve_rate": 82.97872340425532
+        }
+      }
+    },
+    "Medium (5–7 steps)": {
+      "count": 28,
+      "policies": {
+        "Whole-Proof Restart (j=0)": {
+          "solved": 24,
+          "total": 28,
+          "solve_rate": 85.71428571428571
+        },
+        "Compiler Error Line Branch": {
+          "solved": 6,
+          "total": 28,
+          "solve_rate": 21.428571428571427
+        },
+        "Learned XGBoost Fragility Branch": {
+          "solved": 26,
+          "total": 28,
+          "solve_rate": 92.85714285714286
+        },
+        "Oracle Prefix Branch (j=i*-1)": {
+          "solved": 22,
+          "total": 28,
+          "solve_rate": 78.57142857142857
+        }
+      }
+    },
+    "Long (8–14 steps)": {
+      "count": 9,
+      "policies": {
+        "Whole-Proof Restart (j=0)": {
+          "solved": 8,
+          "total": 9,
+          "solve_rate": 88.88888888888889
+        },
+        "Compiler Error Line Branch": {
+          "solved": 6,
+          "total": 9,
+          "solve_rate": 66.66666666666666
+        },
+        "Learned XGBoost Fragility Branch": {
+          "solved": 7,
+          "total": 9,
+          "solve_rate": 77.77777777777779
+        },
+        "Oracle Prefix Branch (j=i*-1)": {
+          "solved": 9,
+          "total": 9,
+          "solve_rate": 100.0
+        }
+      }
+    },
+    "Deep (≥15 steps)": {
+      "count": 19,
+      "policies": {
+        "Whole-Proof Restart (j=0)": {
+          "solved": 16,
+          "total": 19,
+          "solve_rate": 84.21052631578947
+        },
+        "Compiler Error Line Branch": {
+          "solved": 10,
+          "total": 19,
+          "solve_rate": 52.63157894736842
+        },
+        "Learned XGBoost Fragility Branch": {
+          "solved": 15,
+          "total": 19,
+          "solve_rate": 78.94736842105263
+        },
+        "Oracle Prefix Branch (j=i*-1)": {
+          "solved": 15,
+          "total": 19,
+          "solve_rate": 78.94736842105263
+        }
+      }
+    }
+  },
+  "trajectory_logs": [
+    {
+      "problem_name": "problem_857",
+      "num_steps": 9,
+      "true_i_star": 9,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9393798112869263,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 3,
+      "branch_j_oracle": 8,
+      "outcomes": {
+        "restart_j0": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 192
+        },
+        "learned_xgb": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 192
+        }
+      }
+    },
+    {
+      "problem_name": "problem_112",
+      "num_steps": 7,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9746503829956055,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 6,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 174
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 9
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 363
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 1088
+        }
+      }
+    },
+    {
+      "problem_name": "problem_112",
+      "num_steps": 53,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9737558960914612,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 4,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 1290
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2034
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 916
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 353
+        }
+      }
+    },
+    {
+      "problem_name": "problem_1102",
+      "num_steps": 5,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9798047542572021,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 4,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 695
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 794
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 469
+        }
+      }
+    },
+    {
+      "problem_name": "problem_112",
+      "num_steps": 34,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9881224036216736,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 33,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 1290
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 192
+        },
+        "learned_xgb": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "oracle": {
+          "solved": false,
+          "tokens": 2048
+        }
+      }
+    },
+    {
+      "problem_name": "problem_113",
+      "num_steps": 34,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9882122874259949,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 33,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2040
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 745
+        },
+        "oracle": {
+          "solved": false,
+          "tokens": 2048
+        }
+      }
+    },
+    {
+      "problem_name": "problem_1081",
+      "num_steps": 3,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.989449679851532,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 332
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 60
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 438
+        }
+      }
+    },
+    {
+      "problem_name": "problem_1102",
+      "num_steps": 3,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9954900145530701,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 654
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 33
+        },
+        "oracle": {
+          "solved": false,
+          "tokens": 2048
+        }
+      }
+    },
+    {
+      "problem_name": "problem_485",
+      "num_steps": 15,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.935059130191803,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 14,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 390
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 192
+        },
+        "learned_xgb": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "oracle": {
+          "solved": false,
+          "tokens": 2048
+        }
+      }
+    },
+    {
+      "problem_name": "problem_293",
+      "num_steps": 12,
+      "true_i_star": 4,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.8782784938812256,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 0,
+      "branch_j_oracle": 3,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 251
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 143
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 192
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 808
+        }
+      }
+    },
+    {
+      "problem_name": "problem_857",
+      "num_steps": 12,
+      "true_i_star": 4,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.5763821601867676,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 11,
+      "branch_j_oracle": 3,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 277
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 2
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 1026
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 853
+        }
+      }
+    },
+    {
+      "problem_name": "problem_2",
+      "num_steps": 11,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9483776688575745,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 9,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 108
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2045
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 302
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 680
+        }
+      }
+    },
+    {
+      "problem_name": "problem_2",
+      "num_steps": 11,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9409224987030029,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 10,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 681
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 1576
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 835
+        }
+      }
+    },
+    {
+      "problem_name": "problem_2",
+      "num_steps": 9,
+      "true_i_star": 5,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9694429039955139,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 4,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 290
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 844
+        }
+      }
+    },
+    {
+      "problem_name": "problem_2",
+      "num_steps": 7,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.968271017074585,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 94
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2040
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 300
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 285
+        }
+      }
+    },
+    {
+      "problem_name": "problem_959",
+      "num_steps": 7,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9925310015678406,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 5,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 145
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 689
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 919
+        }
+      }
+    },
+    {
+      "problem_name": "problem_644",
+      "num_steps": 70,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9945790767669678,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 69,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 605
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2033
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 471
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 134
+        }
+      }
+    },
+    {
+      "problem_name": "problem_2",
+      "num_steps": 6,
+      "true_i_star": 5,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9503393173217773,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 5,
+      "branch_j_oracle": 4,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 1660
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 1506
+        },
+        "oracle": {
+          "solved": false,
+          "tokens": 2048
+        }
+      }
+    },
+    {
+      "problem_name": "problem_34",
+      "num_steps": 6,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9755629301071167,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 43
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 1147
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 320
+        }
+      }
+    },
+    {
+      "problem_name": "problem_34",
+      "num_steps": 6,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9868676662445068,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 626
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 322
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 197
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 328
+        }
+      }
+    },
+    {
+      "problem_name": "problem_35",
+      "num_steps": 6,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9868676662445068,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 1276
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 52
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 251
+        }
+      }
+    },
+    {
+      "problem_name": "problem_152",
+      "num_steps": 6,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9652962684631348,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 5,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": false,
+          "tokens": 2035
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 156
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 161
+        }
+      }
+    },
+    {
+      "problem_name": "problem_415",
+      "num_steps": 6,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9857723116874695,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 5,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "oracle": {
+          "solved": false,
+          "tokens": 2048
+        }
+      }
+    },
+    {
+      "problem_name": "problem_362",
+      "num_steps": 29,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9773966073989868,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 28,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 450
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 234
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 48
+        }
+      }
+    },
+    {
+      "problem_name": "problem_63",
+      "num_steps": 5,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9944414496421814,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 3,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 25
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 1245
+        }
+      }
+    },
+    {
+      "problem_name": "problem_152",
+      "num_steps": 5,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.968802273273468,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 4,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 487
+        },
+        "learned_xgb": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "oracle": {
+          "solved": false,
+          "tokens": 2048
+        }
+      }
+    },
+    {
+      "problem_name": "problem_323",
+      "num_steps": 5,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9947615265846252,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 165
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 77
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 111
+        }
+      }
+    },
+    {
+      "problem_name": "problem_470",
+      "num_steps": 5,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9626505374908447,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 4,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 585
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 555
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 93
+        }
+      }
+    },
+    {
+      "problem_name": "problem_471",
+      "num_steps": 5,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.993188738822937,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 3,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 2015
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 828
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 727
+        }
+      }
+    },
+    {
+      "problem_name": "problem_694",
+      "num_steps": 5,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9934616088867188,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 3,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 181
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 115
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 306
+        }
+      }
+    },
+    {
+      "problem_name": "problem_800",
+      "num_steps": 5,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9827418923377991,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 1534
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2039
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 112
+        },
+        "oracle": {
+          "solved": false,
+          "tokens": 2048
+        }
+      }
+    },
+    {
+      "problem_name": "problem_699",
+      "num_steps": 7,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9906028509140015,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 3,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 267
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 183
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 897
+        }
+      }
+    },
+    {
+      "problem_name": "problem_35",
+      "num_steps": 4,
+      "true_i_star": 2,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9903547763824463,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 1,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 425
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 677
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 1050
+        }
+      }
+    },
+    {
+      "problem_name": "problem_144",
+      "num_steps": 4,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9868870377540588,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 3,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 94
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 264
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 124
+        }
+      }
+    },
+    {
+      "problem_name": "problem_293",
+      "num_steps": 4,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9894447922706604,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 8
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2037
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 388
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 11
+        }
+      }
+    },
+    {
+      "problem_name": "problem_644",
+      "num_steps": 4,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9936227202415466,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 0,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 644
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 618
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 180
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 1373
+        }
+      }
+    },
+    {
+      "problem_name": "problem_798",
+      "num_steps": 4,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9940280914306641,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 3,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 961
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 597
+        }
+      }
+    },
+    {
+      "problem_name": "problem_1033",
+      "num_steps": 4,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9939684867858887,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 3,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 1560
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2034
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 709
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 110
+        }
+      }
+    },
+    {
+      "problem_name": "problem_1033",
+      "num_steps": 4,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9939684867858887,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 3,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 90
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2033
+        },
+        "learned_xgb": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 479
+        }
+      }
+    },
+    {
+      "problem_name": "problem_1062",
+      "num_steps": 4,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.990105926990509,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 3,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 325
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 199
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 2041
+        }
+      }
+    },
+    {
+      "problem_name": "problem_633",
+      "num_steps": 4,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9939811825752258,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 3,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 97
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2034
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 91
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 87
+        }
+      }
+    },
+    {
+      "problem_name": "problem_531",
+      "num_steps": 3,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9862756729125977,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 894
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 170
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 1429
+        }
+      }
+    },
+    {
+      "problem_name": "problem_644",
+      "num_steps": 3,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9819997549057007,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 120
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 472
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 116
+        }
+      }
+    },
+    {
+      "problem_name": "problem_644",
+      "num_steps": 3,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9819997549057007,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 1132
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 166
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 117
+        }
+      }
+    },
+    {
+      "problem_name": "problem_1033",
+      "num_steps": 3,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9813830256462097,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 1847
+        },
+        "oracle": {
+          "solved": false,
+          "tokens": 2048
+        }
+      }
+    },
+    {
+      "problem_name": "problem_362",
+      "num_steps": 3,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9979373216629028,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 65
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2042
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 231
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 199
+        }
+      }
+    },
+    {
+      "problem_name": "problem_113",
+      "num_steps": 2,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9924989342689514,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 1,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 569
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 1633
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 159
+        }
+      }
+    },
+    {
+      "problem_name": "problem_362",
+      "num_steps": 2,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9982333183288574,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 1,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 399
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 237
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 438
+        }
+      }
+    },
+    {
+      "problem_name": "problem_485",
+      "num_steps": 2,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.992150068283081,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 0,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 192
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2045
+        },
+        "learned_xgb": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "oracle": {
+          "solved": false,
+          "tokens": 2048
+        }
+      }
+    },
+    {
+      "problem_name": "problem_531",
+      "num_steps": 2,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9947938323020935,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 1,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 354
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 310
+        }
+      }
+    },
+    {
+      "problem_name": "problem_644",
+      "num_steps": 2,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9948815107345581,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 0,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 286
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 117
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 323
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 163
+        }
+      }
+    },
+    {
+      "problem_name": "problem_880",
+      "num_steps": 2,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9854261875152588,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 0,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 1596
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 624
+        }
+      }
+    },
+    {
+      "problem_name": "problem_959",
+      "num_steps": 2,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9826849102973938,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 1,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 1901
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2038
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 130
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 109
+        }
+      }
+    },
+    {
+      "problem_name": "problem_959",
+      "num_steps": 2,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.98850017786026,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 1,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 151
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 133
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 529
+        }
+      }
+    },
+    {
+      "problem_name": "problem_1062",
+      "num_steps": 2,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9916009902954102,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 1,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 1427
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2043
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 317
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 220
+        }
+      }
+    },
+    {
+      "problem_name": "problem_193",
+      "num_steps": 16,
+      "true_i_star": 2,
+      "pred_i_star": 2,
+      "max_fragility_prob": 0.858573853969574,
+      "branch_j_xgb": 1,
+      "branch_j_compiler": 4,
+      "branch_j_oracle": 1,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 9
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 8
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 36
+        }
+      }
+    },
+    {
+      "problem_name": "problem_193",
+      "num_steps": 78,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9123157262802124,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 77,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 9
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 2
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 122
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 286
+        }
+      }
+    },
+    {
+      "problem_name": "problem_83",
+      "num_steps": 29,
+      "true_i_star": 2,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.7642652988433838,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 28,
+      "branch_j_oracle": 1,
+      "outcomes": {
+        "restart_j0": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 1128
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 575
+        }
+      }
+    },
+    {
+      "problem_name": "problem_565",
+      "num_steps": 8,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9206132888793945,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 7,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 192
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 2
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 86
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 5
+        }
+      }
+    },
+    {
+      "problem_name": "problem_414",
+      "num_steps": 97,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.6908760666847229,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 7,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2047
+        },
+        "learned_xgb": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "oracle": {
+          "solved": false,
+          "tokens": 2048
+        }
+      }
+    },
+    {
+      "problem_name": "problem_576",
+      "num_steps": 72,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.8919297456741333,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 71,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 3
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 192
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 63
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 3
+        }
+      }
+    },
+    {
+      "problem_name": "problem_811",
+      "num_steps": 64,
+      "true_i_star": 2,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9392461180686951,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 63,
+      "branch_j_oracle": 1,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 9
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 192
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 9
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 5
+        }
+      }
+    },
+    {
+      "problem_name": "problem_193",
+      "num_steps": 43,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9313338994979858,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 3,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 222
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2042
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 78
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 129
+        }
+      }
+    },
+    {
+      "problem_name": "problem_35",
+      "num_steps": 9,
+      "true_i_star": 3,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9738901853561401,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 0,
+      "branch_j_oracle": 2,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 150
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 155
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 353
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 20
+        }
+      }
+    },
+    {
+      "problem_name": "problem_835",
+      "num_steps": 7,
+      "true_i_star": 2,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.6755995750427246,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 6,
+      "branch_j_oracle": 1,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 204
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2036
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 44
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 149
+        }
+      }
+    },
+    {
+      "problem_name": "problem_34",
+      "num_steps": 6,
+      "true_i_star": 3,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9350133538246155,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 5,
+      "branch_j_oracle": 2,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 379
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 1279
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 30
+        }
+      }
+    },
+    {
+      "problem_name": "problem_546",
+      "num_steps": 92,
+      "true_i_star": 4,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.945615291595459,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 91,
+      "branch_j_oracle": 3,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 194
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 175
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 350
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 5
+        }
+      }
+    },
+    {
+      "problem_name": "problem_811",
+      "num_steps": 69,
+      "true_i_star": 2,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9102777242660522,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 68,
+      "branch_j_oracle": 1,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 8
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 7
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 10
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 5
+        }
+      }
+    },
+    {
+      "problem_name": "problem_510",
+      "num_steps": 58,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.907784104347229,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 57,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 126
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 690
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 230
+        }
+      }
+    },
+    {
+      "problem_name": "problem_510",
+      "num_steps": 7,
+      "true_i_star": 2,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.8417647480964661,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 6,
+      "branch_j_oracle": 1,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 965
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2034
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 145
+        },
+        "oracle": {
+          "solved": false,
+          "tokens": 2048
+        }
+      }
+    },
+    {
+      "problem_name": "problem_1103",
+      "num_steps": 7,
+      "true_i_star": 1,
+      "pred_i_star": 2,
+      "max_fragility_prob": 0.6583998799324036,
+      "branch_j_xgb": 1,
+      "branch_j_compiler": 6,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 63
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 2
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 2
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 191
+        }
+      }
+    },
+    {
+      "problem_name": "problem_835",
+      "num_steps": 6,
+      "true_i_star": 2,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9546689987182617,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 5,
+      "branch_j_oracle": 1,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 245
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 159
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 63
+        }
+      }
+    },
+    {
+      "problem_name": "problem_576",
+      "num_steps": 5,
+      "true_i_star": 2,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9248619675636292,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 1,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 3
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 2
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 483
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 3
+        }
+      }
+    },
+    {
+      "problem_name": "problem_811",
+      "num_steps": 5,
+      "true_i_star": 2,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9567243456840515,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 1,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 9
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 2
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 9
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 5
+        }
+      }
+    },
+    {
+      "problem_name": "problem_576",
+      "num_steps": 67,
+      "true_i_star": 2,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.8932242393493652,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 66,
+      "branch_j_oracle": 1,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 188
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 153
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 121
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 3
+        }
+      }
+    },
+    {
+      "problem_name": "problem_188",
+      "num_steps": 40,
+      "true_i_star": 3,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.8046433925628662,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 39,
+      "branch_j_oracle": 2,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 1145
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 2
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 716
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 68
+        }
+      }
+    },
+    {
+      "problem_name": "problem_188",
+      "num_steps": 5,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9942725896835327,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 3,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 53
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2046
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 648
+        },
+        "oracle": {
+          "solved": false,
+          "tokens": 2048
+        }
+      }
+    },
+    {
+      "problem_name": "problem_835",
+      "num_steps": 5,
+      "true_i_star": 3,
+      "pred_i_star": 2,
+      "max_fragility_prob": 0.9025238156318665,
+      "branch_j_xgb": 1,
+      "branch_j_compiler": 4,
+      "branch_j_oracle": 2,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 112
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2034
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 45
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 37
+        }
+      }
+    },
+    {
+      "problem_name": "problem_228",
+      "num_steps": 4,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9675540924072266,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 3,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 1215
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 1013
+        },
+        "oracle": {
+          "solved": false,
+          "tokens": 2048
+        }
+      }
+    },
+    {
+      "problem_name": "problem_510",
+      "num_steps": 4,
+      "true_i_star": 2,
+      "pred_i_star": 2,
+      "max_fragility_prob": 0.8220264911651611,
+      "branch_j_xgb": 1,
+      "branch_j_compiler": 3,
+      "branch_j_oracle": 1,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 574
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2040
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 86
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 1355
+        }
+      }
+    },
+    {
+      "problem_name": "problem_567",
+      "num_steps": 4,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.822728157043457,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 3,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 1297
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "oracle": {
+          "solved": false,
+          "tokens": 2048
+        }
+      }
+    },
+    {
+      "problem_name": "problem_567",
+      "num_steps": 4,
+      "true_i_star": 1,
+      "pred_i_star": 2,
+      "max_fragility_prob": 0.8621347546577454,
+      "branch_j_xgb": 1,
+      "branch_j_compiler": 3,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 551
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2039
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 117
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 186
+        }
+      }
+    },
+    {
+      "problem_name": "problem_835",
+      "num_steps": 4,
+      "true_i_star": 3,
+      "pred_i_star": 2,
+      "max_fragility_prob": 0.8810371160507202,
+      "branch_j_xgb": 1,
+      "branch_j_compiler": 3,
+      "branch_j_oracle": 2,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 74
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 1664
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 43
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 64
+        }
+      }
+    },
+    {
+      "problem_name": "problem_699",
+      "num_steps": 19,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9446131587028503,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 18,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 1047
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 192
+        },
+        "learned_xgb": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 530
+        }
+      }
+    },
+    {
+      "problem_name": "problem_959",
+      "num_steps": 11,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9875189661979675,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 10,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 503
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 284
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 174
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 360
+        }
+      }
+    },
+    {
+      "problem_name": "problem_567",
+      "num_steps": 5,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.8684595227241516,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 4,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 1329
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2034
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 713
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 1723
+        }
+      }
+    },
+    {
+      "problem_name": "problem_505",
+      "num_steps": 4,
+      "true_i_star": 2,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.8927306532859802,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 3,
+      "branch_j_oracle": 1,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 1211
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2034
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 1399
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 590
+        }
+      }
+    },
+    {
+      "problem_name": "problem_534",
+      "num_steps": 4,
+      "true_i_star": 2,
+      "pred_i_star": 2,
+      "max_fragility_prob": 0.9700050950050354,
+      "branch_j_xgb": 1,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 1,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 537
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 2
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 144
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 192
+        }
+      }
+    },
+    {
+      "problem_name": "problem_86",
+      "num_steps": 3,
+      "true_i_star": 1,
+      "pred_i_star": 3,
+      "max_fragility_prob": 0.3677119314670563,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 708
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": false,
+          "tokens": 2043
+        },
+        "oracle": {
+          "solved": false,
+          "tokens": 2048
+        }
+      }
+    },
+    {
+      "problem_name": "problem_86",
+      "num_steps": 3,
+      "true_i_star": 2,
+      "pred_i_star": 3,
+      "max_fragility_prob": 0.6082144379615784,
+      "branch_j_xgb": 2,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 1,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 490
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 669
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 1787
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 520
+        }
+      }
+    },
+    {
+      "problem_name": "problem_86",
+      "num_steps": 3,
+      "true_i_star": 2,
+      "pred_i_star": 2,
+      "max_fragility_prob": 0.6119121313095093,
+      "branch_j_xgb": 1,
+      "branch_j_compiler": 0,
+      "branch_j_oracle": 1,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 281
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 993
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 1211
+        },
+        "oracle": {
+          "solved": false,
+          "tokens": 2048
+        }
+      }
+    },
+    {
+      "problem_name": "problem_130",
+      "num_steps": 3,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.858450710773468,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 1787
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2041
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 33
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 1021
+        }
+      }
+    },
+    {
+      "problem_name": "problem_280",
+      "num_steps": 3,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9340388774871826,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 294
+        },
+        "learned_xgb": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 872
+        }
+      }
+    },
+    {
+      "problem_name": "problem_323",
+      "num_steps": 3,
+      "true_i_star": 2,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9621381163597107,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 1,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 21
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 2
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 219
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 15
+        }
+      }
+    },
+    {
+      "problem_name": "problem_534",
+      "num_steps": 3,
+      "true_i_star": 2,
+      "pred_i_star": 2,
+      "max_fragility_prob": 0.8957771062850952,
+      "branch_j_xgb": 1,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 1,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 442
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 2
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 6
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 263
+        }
+      }
+    },
+    {
+      "problem_name": "problem_1103",
+      "num_steps": 3,
+      "true_i_star": 2,
+      "pred_i_star": 2,
+      "max_fragility_prob": 0.9263911247253418,
+      "branch_j_xgb": 1,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 1,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 9
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 22
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 11
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 16
+        }
+      }
+    },
+    {
+      "problem_name": "problem_546",
+      "num_steps": 3,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9944593906402588,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 2,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 5
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2034
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 984
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 201
+        }
+      }
+    },
+    {
+      "problem_name": "problem_503",
+      "num_steps": 2,
+      "true_i_star": 1,
+      "pred_i_star": 2,
+      "max_fragility_prob": 0.9575101733207703,
+      "branch_j_xgb": 1,
+      "branch_j_compiler": 1,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 304
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 1256
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 1166
+        },
+        "oracle": {
+          "solved": false,
+          "tokens": 2048
+        }
+      }
+    },
+    {
+      "problem_name": "problem_524",
+      "num_steps": 2,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9765705466270447,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 1,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 118
+        },
+        "compiler": {
+          "solved": false,
+          "tokens": 2048
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 1560
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 992
+        }
+      }
+    },
+    {
+      "problem_name": "problem_633",
+      "num_steps": 2,
+      "true_i_star": 1,
+      "pred_i_star": 2,
+      "max_fragility_prob": 0.9714464545249939,
+      "branch_j_xgb": 1,
+      "branch_j_compiler": 0,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 77
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 101
+        },
+        "learned_xgb": {
+          "solved": false,
+          "tokens": 2044
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 153
+        }
+      }
+    },
+    {
+      "problem_name": "problem_933",
+      "num_steps": 2,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9841001033782959,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 0,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 324
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 72
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 208
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 192
+        }
+      }
+    },
+    {
+      "problem_name": "problem_933",
+      "num_steps": 2,
+      "true_i_star": 2,
+      "pred_i_star": 2,
+      "max_fragility_prob": 0.9420056343078613,
+      "branch_j_xgb": 1,
+      "branch_j_compiler": 1,
+      "branch_j_oracle": 1,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 36
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 51
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 322
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 357
+        }
+      }
+    },
+    {
+      "problem_name": "problem_959",
+      "num_steps": 2,
+      "true_i_star": 1,
+      "pred_i_star": 1,
+      "max_fragility_prob": 0.9927524328231812,
+      "branch_j_xgb": 0,
+      "branch_j_compiler": 1,
+      "branch_j_oracle": 0,
+      "outcomes": {
+        "restart_j0": {
+          "solved": true,
+          "tokens": 1004
+        },
+        "compiler": {
+          "solved": true,
+          "tokens": 414
+        },
+        "learned_xgb": {
+          "solved": true,
+          "tokens": 1302
+        },
+        "oracle": {
+          "solved": true,
+          "tokens": 1173
+        }
+      }
+    }
+  ]
+}

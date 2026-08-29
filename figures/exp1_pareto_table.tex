@@ -1,0 +1,26 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Policy} & \textbf{Budget ($B$)} & \textbf{Solved / Total} & \textbf{Solve Rate [95\% CI]} & \textbf{Total Tokens} & \textbf{Avg Tok/Target} & \textbf{Tokens / Solve} \\
+\midrule
+Oracle Prefix Branch (Upper Bound) & 512 & 63/103 & 61.2\% [51.5, 70.9] & 32,510 & 316 & 516 \\
+Learned Fragility Branch (Ours) & 512 & 52/103 & 50.5\% [39.8, 60.2] & 36,067 & 350 & 694 \\
+Whole-Proof Restart ($j=0$) & 512 & 59/103 & 57.3\% [48.5, 67.0] & 35,343 & 343 & 599 \\
+Compiler Error Line Branch & 512 & 32/103 & 31.1\% [21.4, 39.8] & 40,594 & 394 & 1269 \\
+\midrule
+Oracle Prefix Branch (Upper Bound) & 1024 & 78/103 & 75.7\% [67.0, 84.5] & 46,392 & 450 & 595 \\
+Learned Fragility Branch (Ours) & 1024 & 70/103 & 68.0\% [59.2, 76.7] & 54,731 & 531 & 782 \\
+Whole-Proof Restart ($j=0$) & 1024 & 73/103 & 70.9\% [63.1, 78.6] & 52,377 & 509 & 717 \\
+Compiler Error Line Branch & 1024 & 32/103 & 31.1\% [22.3, 39.8] & 77,238 & 750 & 2414 \\
+\midrule
+Oracle Prefix Branch (Upper Bound) & 2048 & 85/103 & 82.5\% [74.8, 90.3] & 72,157 & 701 & 849 \\
+Learned Fragility Branch (Ours) & 2048 & 88/103 & 85.4\% [78.6, 91.3] & 72,528 & 704 & 824 \\
+Whole-Proof Restart ($j=0$) & 2048 & 91/103 & 88.3\% [81.6, 94.2] & 70,213 & 682 & 772 \\
+Compiler Error Line Branch & 2048 & 37/103 & 35.9\% [26.2, 44.7] & 144,096 & 1399 & 3894 \\
+\bottomrule
+\end{tabular}
+\caption{Cost-Quality Pareto Frontier Benchmark across Budgets $B \in \{512, 1024, 2048, 4096\}$ on Held-Out Test Set ($N_{\text{test}}$). Brackets denote 95\% non-parametric bootstrap confidence intervals (1,000 resamples).}
+\label{tab:exp1_pareto_frontier}
+\end{table}
