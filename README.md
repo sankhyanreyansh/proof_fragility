@@ -16,7 +16,7 @@ This repository contains the official implementation of **Proof Fragility Predic
 
 ### Step 1: Clone Repository & Create Conda Environment
 ```bash
-git clone <repository_url>
+git clone https://github.com/sankhyanreyansh/proof_fragility.git
 cd proof_fragility
 
 # Create and activate Python 3.10 environment
@@ -26,9 +26,11 @@ conda activate fragility
 
 ### Step 2: Install Python Dependencies
 ```bash
+# Install PyTorch with CUDA support
 pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
-pip install transformers accelerate sentencepiece protobuf
-pip install xgboost scikit-learn pandas numpy matplotlib rich
+
+# Install all project dependencies from requirements.txt
+pip install -r requirements.txt
 ```
 
 ### Step 3: Install Lean 4 & Build Mathlib Environment
