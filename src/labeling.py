@@ -43,7 +43,7 @@ def test_prefix_repairable(
     prefix_steps: List[str],
     k_samples: int = 8,
     temperature: float = 0.7,
-    max_new_tokens: int = 512,
+    max_new_tokens: int = 1024,
     batch_size: int = 4
 ) -> bool:
     """
@@ -103,7 +103,7 @@ def find_fragile_step_binary_search(
     header: str,
     steps: List[str],
     k_samples: int = 8,
-    max_new_tokens: int = 512
+    max_new_tokens: int = 1024
 ) -> Optional[int]:
     """
     Finds i* = min { i : R(i) == 0 } via binary search on semantic repairability without artificial syntax caps.
@@ -185,8 +185,8 @@ def main():
                         help="Path to save ground-truth labeled dataset JSONL")
     parser.add_argument("--k_samples", type=int, default=8,
                         help="Suffix sample budget K for prefix repairability testing (default: 8)")
-    parser.add_argument("--max_new_tokens", type=int, default=512,
-                        help="Maximum new tokens per suffix generation attempt (default: 512)")
+    parser.add_argument("--max_new_tokens", type=int, default=1024,
+                        help="Maximum new tokens per suffix generation attempt (default: 1024)")
     parser.add_argument("--max_attempts", type=int, default=None,
                         help="Optional cap on attempts to label (default: None, label all available)")
     args = parser.parse_args()

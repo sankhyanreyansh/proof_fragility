@@ -567,7 +567,7 @@ def main():
             "--input_corpus", args.input_corpus,
             "--output_file", args.labeled_file,
             "--k_samples", str(args.k_samples),
-            "--max_new_tokens", str(min(512, args.max_new_tokens))
+            "--max_new_tokens", str(args.max_new_tokens)
         ]
         if args.max_attempts is not None:
             cmd_label.extend(["--max_attempts", str(args.max_attempts)])
