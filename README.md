@@ -53,7 +53,7 @@ cd ..
 
 ## 3. What Happens on the First Run
 
-When you run any script for the first time (`src/labeling.py`, `src/model_and_eval.py`, or `src/exp1_pipeline.py`):
+When you run any script for the first time (`src/labeling.py`, `src/model_and_eval.py`, or `src/pipeline.py`):
 
 1. **Automatic Model Download (~14 GB)**:
    - Hugging Face `transformers` will automatically download the neural theorem prover weights for [`deepseek-ai/DeepSeek-Prover-V2-7B`](https://huggingface.co/deepseek-ai/DeepSeek-Prover-V2-7B) into your local cache directory (`~/.cache/huggingface/hub/`).
@@ -88,14 +88,14 @@ python3 -u src/labeling.py \
 ---
 
 ### Option B: Run Full Pipeline End-to-End
-To run the entire pipeline (Labeling $\to$ Model Training $\to$ Closed-Loop Pareto Evaluation $\to$ Publication Plotting) in a single command:
+To run the entire pipeline (Harvesting / Labeling $\to$ Model Training $\to$ Closed-Loop Pareto Evaluation $\to$ Publication Plotting) in a single command:
 
 ```bash
 tmux new -s exp1
 conda activate fragility
 export PYTORCH_CUDA_ALLOC_CONF="expandable_segments:True"
 
-python3 -u src/exp1_pipeline.py --stage all
+python3 -u src/pipeline.py --stage all
 ```
 
 ---
@@ -108,7 +108,7 @@ Extracts candidates from the Recoverable Band, sorts by proof structure & length
 python3 -u src/labeling.py \
   --input_corpus data/exp1_corpus.jsonl \
   --output_file data/exp1_labeled.jsonl \
-  --k_samples 4
+  --k_samples 8
 ```
 
 #### Stage 2: 70/30 Group-Split XGBoost Model Training
@@ -135,7 +135,7 @@ python3 -u src/model_and_eval.py \
 #### Stage 4: Publication Plots & LaTeX Tables
 Generates 300-DPI publication Pareto curves with 95% bootstrap confidence bands and camera-ready LaTeX summary tables:
 ```bash
-python3 -u src/exp1_pipeline.py --stage plot --figures_dir figures
+python3 -u src/pipeline.py --stage plot --figures_dir figures
 ```
 
 ---
@@ -148,9 +148,9 @@ python3 -u src/exp1_pipeline.py --stage plot --figures_dir figures
 │   ├── lean_engine.py       # Core Module 1: AST Parser, DeepSeek Prompt Formatter, Verifier & 53-D Feature Extractor
 │   ├── labeling.py          # Core Module 2: Structure-Prioritized Counterfactual Ground-Truth Labeler
 │   ├── model_and_eval.py    # Core Module 3: XGBoost Classifier & Multi-Budget Closed-Loop Pareto Evaluator
-│   └── exp1_pipeline.py     # Core Module 4: Master CLI Orchestrator & Publication Plotter
+│   └── pipeline.py          # Core Module 4: Master CLI Orchestrator, Multi-Dataset Harvester & Publication Plotter
 ├── data/
-│   ├── exp1_corpus.jsonl    # 8,000 harvested DeepSeek-Prover-V2 proof attempts
+│   ├── exp1_corpus.jsonl    # Harvested proof attempts (Lean-Workbook / miniF2F / ProofNet)
 │   ├── exp1_labeled.jsonl   # Ground-truth counterfactual i* labeled dataset
 │   └── exp1_test_ids.json   # 70/30 held-out test partition records
 ├── models/

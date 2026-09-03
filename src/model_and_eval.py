@@ -25,13 +25,17 @@ from rich.console import Console
 from rich.table import Table
 from rich.progress import track
 
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 from lean_engine import (
     LeanVerifier,
     format_deepseek_prompt,
     build_full_code,
     clean_generated_suffix,
     extract_step_features,
-    extract_features_from_dataset
+    extract_features_from_dataset,
+    map_error_line_to_step
 )
 
 console = Console()
@@ -292,7 +296,7 @@ def run_policy_budget(
     header: str,
     valid_prefix_steps: List[str],
     token_budget: int = 2048,
-    max_step_tokens: int = 192,
+    max_step_tokens: int = 512,
     temperature: float = 0.7
 ) -> Tuple[bool, int, str]:
     """
@@ -394,11 +398,14 @@ def evaluate_pareto_budget(
     test_set: List[Dict[str, Any]],
     token_budget: int,
     tau: float = 0.50,
-    output_json_path: str = "data/exp1_frontier_B2048.json"
+    output_json_path: str = "data/exp1_frontier_B2048.json",
+    gen_model=None,
+    tokenizer=None
 ) -> Dict[str, Any]:
     """
     Evaluates 4 competing policies on the held-out test cohort under budget cap B.
     Calculates stratified metrics across proof horizons and 95% bootstrap CIs.
+    Reuses neural generator model instance if provided to prevent VRAM memory fragmentation.
     """
     verifier = LeanVerifier(project_dir="lean_env", timeout_sec=30)
 
@@ -406,20 +413,23 @@ def evaluate_pareto_budget(
     xgb_model = xgb.XGBClassifier()
     xgb_model.load_model(xgb_model_path)
 
-    # 2. Load Neural Theorem Prover
-    console.log(f"[bold green]Loading generator model: {generator_model_name}...[/bold green]")
+    # 2. Load Neural Theorem Prover if not provided
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    tokenizer = AutoTokenizer.from_pretrained(generator_model_name, trust_remote_code=True, use_fast=True)
-    if tokenizer.pad_token is None:
-        tokenizer.pad_token = tokenizer.eos_token
+    if tokenizer is None:
+        console.log(f"[bold green]Loading tokenizer: {generator_model_name}...[/bold green]")
+        tokenizer = AutoTokenizer.from_pretrained(generator_model_name, trust_remote_code=True, use_fast=True)
+        if tokenizer.pad_token is None:
+            tokenizer.pad_token = tokenizer.eos_token
 
-    gen_model = AutoModelForCausalLM.from_pretrained(
-        generator_model_name,
-        dtype=torch.bfloat16 if device == "cuda" else torch.float32,
-        device_map="auto" if device == "cuda" else None,
-        trust_remote_code=True
-    )
-    gen_model.eval()
+    if gen_model is None:
+        console.log(f"[bold green]Loading generator model: {generator_model_name}...[/bold green]")
+        gen_model = AutoModelForCausalLM.from_pretrained(
+            generator_model_name,
+            dtype=torch.bfloat16 if device == "cuda" else torch.float32,
+            device_map="auto" if device == "cuda" else None,
+            trust_remote_code=True
+        )
+        gen_model.eval()
 
     policies = [
         "Whole-Proof Restart (j=0)",
@@ -458,9 +468,10 @@ def evaluate_pareto_budget(
         policy_results["Whole-Proof Restart (j=0)"]["solved_array"].append(int(s0))
         policy_results["Whole-Proof Restart (j=0)"]["tokens_array"].append(t0)
 
-        # Policy 2: Compiler Error Line Branch
-        comp_err_line = err_line or 1
-        comp_j = max(0, min(n_steps - 1, int(comp_err_line) - 1))
+        # Policy 2: Compiler Error Line Branch (mapped to discrete step)
+        comp_step = map_error_line_to_step(err_line, header, steps) if err_line is not None else 1
+        comp_step = comp_step or 1
+        comp_j = max(0, min(n_steps - 1, int(comp_step) - 1))
         s_comp, t_comp, _ = run_policy_budget(gen_model, tokenizer, device, verifier, header, steps[:comp_j], token_budget=token_budget)
         policy_results["Compiler Error Line Branch"]["solved_array"].append(int(s_comp))
         policy_results["Compiler Error Line Branch"]["tokens_array"].append(t_comp)
@@ -516,9 +527,13 @@ def evaluate_pareto_budget(
             "solved": s_count,
             "total_evaluated": total_eval,
             "solve_rate": mean_rate,
+            "pass_rate": mean_rate / 100.0,
             "solve_rate_ci_95": [rate_low, rate_high],
+            "ci_95_low": rate_low / 100.0,
+            "ci_95_high": rate_high / 100.0,
             "total_tokens": total_tok,
             "avg_tokens_per_target": avg_tok,
+            "mean_tokens_spent": avg_tok,
             "tokens_per_solve": tok_per_solve
         }
 
@@ -569,12 +584,13 @@ def evaluate_pareto_budget(
 
     console.print(table)
 
-    # Save Output JSON
+    # Save Output JSON (with dual 'policies' and 'summary_results' schema for seamless plotter interop)
     os.makedirs(os.path.dirname(output_json_path), exist_ok=True)
     result_payload = {
         "token_budget": token_budget,
         "tau_fallback": tau,
         "total_evaluated": total_eval,
+        "policies": summary_results,
         "summary_results": summary_results,
         "horizon_breakdown": horizon_breakdown,
         "trajectory_logs": trajectory_logs
@@ -625,6 +641,21 @@ def main():
 
         console.log(f"Loaded [bold cyan]{len(test_records)}[/bold cyan] held-out test proof attempts for evaluation.")
 
+        # Load generator model once for all Pareto budget runs to avoid VRAM leaks and OOM
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        console.log(f"[bold green]Loading generator model: {args.generator_model}...[/bold green]")
+        tokenizer = AutoTokenizer.from_pretrained(args.generator_model, trust_remote_code=True, use_fast=True)
+        if tokenizer.pad_token is None:
+            tokenizer.pad_token = tokenizer.eos_token
+
+        gen_model = AutoModelForCausalLM.from_pretrained(
+            args.generator_model,
+            dtype=torch.bfloat16 if device == "cuda" else torch.float32,
+            device_map="auto" if device == "cuda" else None,
+            trust_remote_code=True
+        )
+        gen_model.eval()
+
         for b in args.budgets:
             out_file = f"data/exp1_frontier_B{b}.json"
             evaluate_pareto_budget(
@@ -633,7 +664,9 @@ def main():
                 test_set=test_records,
                 token_budget=b,
                 tau=args.tau,
-                output_json_path=out_file
+                output_json_path=out_file,
+                gen_model=gen_model,
+                tokenizer=tokenizer
             )
 
 
