@@ -150,15 +150,14 @@ def find_fragile_step_binary_search(
     candidate_i_star = high  # Guaranteed earliest fragile step candidate (1-based)
 
     # Step 4: Boundary Stability Confirmation
-    # Re-verify that the prefix retained up to (candidate_i_star - 1) is genuinely salvageable
-    if candidate_i_star > 1:
-        confirmed = test_prefix_repairable(
-            model, tokenizer, device, verifier, header, steps[:candidate_i_star - 1],
-            k_samples=k_samples, max_new_tokens=max_new_tokens
-        )
-        if not confirmed:
-            # If candidate_i_star - 1 fails on re-test due to stochastic variance, backtrack to confirmed valid prefix
-            return max(1, low)
+    # Re-verify boundary R(low) == 1 on prefix steps[:low] with expanded budget 2K (16 samples)
+    confirmed = test_prefix_repairable(
+        model, tokenizer, device, verifier, header, steps[:low],
+        k_samples=k_samples * 2, max_new_tokens=max_new_tokens
+    )
+    if not confirmed:
+        # Boundary is unstable / stochastic noise in earlier search; reject to avoid false labeling
+        return None
 
     return candidate_i_star
 
@@ -215,12 +214,12 @@ def main():
     for r in records:
         problem_map[r["problem_name"]].append(r)
 
-    # Recoverable Band: 1 <= solves <= 6 out of 8 (or 0 < pass rate < 80%)
+    # Recoverable Band: 0.0 < (solves / total_att) <= 0.75
     recoverable_problems: Set[str] = set()
     for p_name, attempts in problem_map.items():
         solves = sum(1 for a in attempts if a.get("verdict") == 1)
         total_att = len(attempts)
-        if 1 <= solves <= 6 or (total_att > 0 and 0 < solves / total_att < 0.80):
+        if total_att > 0 and (0.0 < (solves / total_att) <= 0.75):
             recoverable_problems.add(p_name)
 
     console.log(f"Identified [bold cyan]{len(recoverable_problems)}[/bold cyan] targets in the Recoverable Band.")
@@ -319,7 +318,10 @@ def main():
             gc.collect()
 
     console.log(f"[bold green]✓ Labeling Complete![/bold green] Saved labeled dataset to [magenta]{args.output_file}[/magenta].")
-    console.log(f"Successfully Labeled (i* found): [bold green]{labeled_count:,}[/bold green] ({labeled_count/len(candidate_attempts)*100:.1f}% yield)")
+    if candidate_attempts:
+        console.log(f"Successfully Labeled (i* found): [bold green]{labeled_count:,}[/bold green] ({labeled_count/len(candidate_attempts)*100:.1f}% yield)")
+    else:
+        console.log("No candidate attempts to label.")
     console.log(f"Unrepairable / Capacity Limit: [yellow]{unrepairable_count:,}[/yellow]")
 
 

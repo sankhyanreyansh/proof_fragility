@@ -503,6 +503,8 @@ def main():
                         help="Confidence fallback threshold for Learned Fragility Branch (default: 0.50)")
     parser.add_argument("--max_eval_proofs", type=int, default=None,
                         help="Optional cap on test proofs to evaluate (default: None, evaluate all)")
+    parser.add_argument("--max_step_tokens", type=int, default=1024,
+                        help="Maximum new tokens per candidate generation step (default: 1024)")
     parser.add_argument("--figures_dir", type=str, default="figures",
                         help="Output directory for publication figures and tables")
     args = parser.parse_args()
@@ -518,6 +520,7 @@ def main():
         f"• [cyan]Labeled File:[/cyan] {args.labeled_file}\n"
         f"• [cyan]Model File:[/cyan] {args.model_file}\n"
         f"• [cyan]Confidence Tau:[/cyan] {args.tau}\n"
+        f"• [cyan]Max Step Tokens:[/cyan] {args.max_step_tokens}\n"
         f"• [cyan]Pareto Budgets:[/cyan] {args.budgets} tokens\n"
         f"• [cyan]Figures Output:[/cyan] {args.figures_dir}/",
         title="[bold green]Configuration[/bold green]",
@@ -592,6 +595,7 @@ def main():
             "--model_path", args.model_file,
             "--test_ids_path", args.test_ids_file,
             "--tau", str(args.tau),
+            "--max_step_tokens", str(args.max_step_tokens),
             "--budgets"
         ] + [str(b) for b in args.budgets]
         if args.max_eval_proofs is not None:

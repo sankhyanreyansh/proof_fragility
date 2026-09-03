@@ -561,16 +561,6 @@ class LeanVerifier:
                 os.remove(temp_path)
 
 
-def is_prefix_syntactically_valid(verifier: LeanVerifier, header: str, prefix_steps: List[str]) -> bool:
-    """Checks if the prefix compiles cleanly when stubbed with sorry."""
-    if not prefix_steps:
-        return True
-
-    code = build_full_code(header, prefix_steps=prefix_steps, suffix="", append_sorry=True)
-    res = verifier.verify(code)
-    return res["has_sorry"] and not ("error:" in res.get("raw_output", ""))
-
-
 # =============================================================================
 # 3. 53-Dimensional Feature Extractor
 # =============================================================================
@@ -585,7 +575,8 @@ def extract_step_features(
     all_steps: List[str] = None
 ) -> Dict[str, Any]:
     """
-    Extracts structured 53-dimensional numerical and categorical features for step s_i.
+    Extracts structured 53-dimensional numerical and categorical features for step s_i
+    (11 structural + 23 tactic + 5 complexity + 11 compiler + 3 global context = 53).
     """
     cleaned_step = step_text.strip()
     one_based_idx = step_idx + 1
@@ -614,14 +605,14 @@ def extract_step_features(
     is_focus_dot = int(cleaned_step.startswith("·") or " ·" in cleaned_step)
     has_try = int("try " in lower_step or "(try" in lower_step)
 
-    # 3. Complexity & Sub-Proof Indicators (6)
+    # 3. Complexity & Sub-Proof Indicators (5: has_nested_proof, has_hypothesis_decl, bracket_count, math_symbol_count, has_wildcard)
     has_nested_proof = int(":= by" in cleaned_step or "\nby" in cleaned_step or " by " in cleaned_step)
     has_hypothesis_decl = int(bool(re.search(r"\bhave\s+\w+\s*:", cleaned_step) or re.search(r"\bh\d*\s*:", cleaned_step)))
     bracket_count = sum(cleaned_step.count(b) for b in ["(", ")", "[", "]", "{", "}", "⟨", "⟩"])
     math_symbol_count = sum(cleaned_step.count(s) for s in ["=", "≠", "≤", "≥", "<", ">", "+", "-", "*", "/", "^", "∈", "∉", "∀", "∃", "↔", "∧", "∨"])
     has_wildcard = int("*" in cleaned_step or "_" in cleaned_step or ".." in cleaned_step)
 
-    # 4. Lean Compiler Error Alignment (10)
+    # 4. Lean Compiler Error Alignment (11: has_err_line, dist_to_error_step, signed_dist_to_error_step, is_at_error_step, is_before_error_step, is_after_error_step, and 5 error types)
     err_step_val = None
     if compiler_error_line is not None and isinstance(compiler_error_line, (int, float)):
         # If compiler_error_line exceeds total_steps, it represents a line number in the compiled file;

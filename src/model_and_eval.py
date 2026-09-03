@@ -296,7 +296,7 @@ def run_policy_budget(
     header: str,
     valid_prefix_steps: List[str],
     token_budget: int = 2048,
-    max_step_tokens: int = 512,
+    max_step_tokens: int = 1024,
     temperature: float = 0.7
 ) -> Tuple[bool, int, str]:
     """
@@ -400,7 +400,8 @@ def evaluate_pareto_budget(
     tau: float = 0.50,
     output_json_path: str = "data/exp1_frontier_B2048.json",
     gen_model=None,
-    tokenizer=None
+    tokenizer=None,
+    max_step_tokens: int = 1024
 ) -> Dict[str, Any]:
     """
     Evaluates 4 competing policies on the held-out test cohort under budget cap B.
@@ -464,7 +465,7 @@ def evaluate_pareto_budget(
         )
 
         # Policy 1: Whole-Proof Restart (j=0)
-        s0, t0, _ = run_policy_budget(gen_model, tokenizer, device, verifier, header, [], token_budget=token_budget)
+        s0, t0, _ = run_policy_budget(gen_model, tokenizer, device, verifier, header, [], token_budget=token_budget, max_step_tokens=max_step_tokens)
         policy_results["Whole-Proof Restart (j=0)"]["solved_array"].append(int(s0))
         policy_results["Whole-Proof Restart (j=0)"]["tokens_array"].append(t0)
 
@@ -472,18 +473,18 @@ def evaluate_pareto_budget(
         comp_step = map_error_line_to_step(err_line, header, steps) if err_line is not None else 1
         comp_step = comp_step or 1
         comp_j = max(0, min(n_steps - 1, int(comp_step) - 1))
-        s_comp, t_comp, _ = run_policy_budget(gen_model, tokenizer, device, verifier, header, steps[:comp_j], token_budget=token_budget)
+        s_comp, t_comp, _ = run_policy_budget(gen_model, tokenizer, device, verifier, header, steps[:comp_j], token_budget=token_budget, max_step_tokens=max_step_tokens)
         policy_results["Compiler Error Line Branch"]["solved_array"].append(int(s_comp))
         policy_results["Compiler Error Line Branch"]["tokens_array"].append(t_comp)
 
         # Policy 3: Learned XGBoost Fragility Branch
-        s_xgb, t_xgb, _ = run_policy_budget(gen_model, tokenizer, device, verifier, header, steps[:branch_j_xgb], token_budget=token_budget)
+        s_xgb, t_xgb, _ = run_policy_budget(gen_model, tokenizer, device, verifier, header, steps[:branch_j_xgb], token_budget=token_budget, max_step_tokens=max_step_tokens)
         policy_results["Learned XGBoost Fragility Branch"]["solved_array"].append(int(s_xgb))
         policy_results["Learned XGBoost Fragility Branch"]["tokens_array"].append(t_xgb)
 
         # Policy 4: Oracle Prefix Branch (j = i* - 1)
         oracle_j = max(0, true_i_star - 1)
-        s_ora, t_ora, _ = run_policy_budget(gen_model, tokenizer, device, verifier, header, steps[:oracle_j], token_budget=token_budget)
+        s_ora, t_ora, _ = run_policy_budget(gen_model, tokenizer, device, verifier, header, steps[:oracle_j], token_budget=token_budget, max_step_tokens=max_step_tokens)
         policy_results["Oracle Prefix Branch (j=i*-1)"]["solved_array"].append(int(s_ora))
         policy_results["Oracle Prefix Branch (j=i*-1)"]["tokens_array"].append(t_ora)
 
@@ -613,6 +614,7 @@ def main():
     parser.add_argument("--tau", type=float, default=0.50, help="Confidence fallback threshold")
     parser.add_argument("--generator_model", type=str, default="deepseek-ai/DeepSeek-Prover-V2-7B", help="HuggingFace generator model")
     parser.add_argument("--max_eval_proofs", type=int, default=None, help="Optional cap on test proofs to evaluate")
+    parser.add_argument("--max_step_tokens", type=int, default=1024, help="Maximum new tokens per candidate generation step (default: 1024)")
     args = parser.parse_args()
 
     if args.train:
@@ -666,7 +668,8 @@ def main():
                 tau=args.tau,
                 output_json_path=out_file,
                 gen_model=gen_model,
-                tokenizer=tokenizer
+                tokenizer=tokenizer,
+                max_step_tokens=args.max_step_tokens
             )
 
 
