@@ -329,7 +329,15 @@ def run_policy_budget(
                 eos_token_id=tokenizer.eos_token_id
             )
 
-        gen_tokens = len(output[0][prompt_len:])
+        seq = output[0]
+        if tokenizer.pad_token_id is not None:
+            gen_tokens = int((seq[prompt_len:] != tokenizer.pad_token_id).sum().item())
+        else:
+            gen_tokens = len(seq[prompt_len:])
+
+        if gen_tokens == 0:
+            break
+
         tokens_spent += gen_tokens
 
         raw_suffix = tokenizer.decode(output[0][prompt_len:], skip_special_tokens=True, clean_up_tokenization_spaces=False)
@@ -610,7 +618,7 @@ def main():
     parser.add_argument("--model_path", type=str, default="models/exp1_xgboost.json", help="Path to save/load XGBoost model")
     parser.add_argument("--dataset", type=str, default="data/exp1_labeled.jsonl", help="Path to ground-truth labeled JSONL")
     parser.add_argument("--test_ids_path", type=str, default="data/exp1_test_ids.json", help="Path to save/load held-out test proof records")
-    parser.add_argument("--budgets", nargs="+", type=int, default=[512, 1024, 2048, 4096], help="Compute budget caps B for evaluation")
+    parser.add_argument("--budgets", nargs="+", type=int, default=[512, 1024, 4096], help="Compute budget caps B for evaluation")
     parser.add_argument("--tau", type=float, default=0.50, help="Confidence fallback threshold")
     parser.add_argument("--generator_model", type=str, default="deepseek-ai/DeepSeek-Prover-V2-7B", help="HuggingFace generator model")
     parser.add_argument("--max_eval_proofs", type=int, default=None, help="Optional cap on test proofs to evaluate")

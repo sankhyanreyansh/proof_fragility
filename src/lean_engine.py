@@ -190,11 +190,58 @@ def split_theorem_and_proof(lean_code: str) -> Tuple[str, str]:
         return header, ""
 
 
+def extract_binders(header: str) -> List[str]:
+    """
+    Extracts variable and hypothesis binders from a theorem header using balanced
+    delimiter parsing, handling nested parentheses and brackets
+    (e.g., '(n : Fin (k + 1))', '(h : (a : ℝ) → a > 0)', '{x : ℝ}', '[Group G]').
+    """
+    if not header:
+        return []
+
+    clean_hdr = strip_imports(header).strip()
+    m = re.search(r"^(?:theorem|lemma|example)(?:\s+[\w\.'«»]+)?\s*", clean_hdr)
+    if not m:
+        return []
+
+    rest = clean_hdr[m.end():]
+    binders = []
+    i = 0
+    n = len(rest)
+
+    while i < n:
+        ch = rest[i]
+        if ch in "({[":
+            start = i
+            open_delim = ch
+            close_delim = ")" if ch == "(" else ("}" if ch == "{" else "]")
+            depth = 0
+            while i < n:
+                curr = rest[i]
+                if curr == open_delim:
+                    depth += 1
+                elif curr == close_delim:
+                    depth -= 1
+                    if depth == 0:
+                        binders.append(rest[start:i + 1])
+                        break
+                i += 1
+            i += 1
+        elif ch == ":" and not (i + 1 < n and rest[i + 1] == "="):
+            # Hit the theorem statement's conclusion colon
+            break
+        else:
+            i += 1
+
+    return binders
+
+
 def is_valid_candidate_theorem(statement: str) -> bool:
     """
     Validates that a Lean-Workbook formal statement is a well-formed,
     non-trivial theorem suitable for proof harvesting.
     Requires explicit variable binders or quantifiers.
+    Handles complex and nested binders like '(n : Fin (k + 1))' or '(h : (a : ℝ) → a > 0)'.
     """
     if not statement or not isinstance(statement, str):
         return False
@@ -208,7 +255,8 @@ def is_valid_candidate_theorem(statement: str) -> bool:
     if not header or not (header.startswith("theorem") or header.startswith("lemma") or header.startswith("example")):
         return False
 
-    has_binders = bool(re.search(r"^(?:theorem|lemma|example)\s+[\w\.'«»]+\s*\([^)]+:[^)]+\)", header))
+    binders = extract_binders(header)
+    has_binders = any(":" in b for b in binders) or any(b.startswith("[") and b.endswith("]") for b in binders)
     has_quantifiers = "∀" in header or "∃" in header
 
     return has_binders or has_quantifiers
@@ -425,14 +473,26 @@ def build_full_code(
 
 
 def map_error_line_to_step(
-    error_line: Optional[int],
-    header: str,
-    steps: List[str]
+    arg1: Any,
+    arg2: Any = "",
+    arg3: Any = None
 ) -> Optional[int]:
     """
     Maps a Lean compiler error line number (from the full compiled file)
     back to the 1-based macro-step index (1..n) that contains or caused the error.
+    Supports both signatures:
+      map_error_line_to_step(error_line, header, steps)
+      map_error_line_to_step(header, steps, error_line)
     """
+    if isinstance(arg1, str) and isinstance(arg2, list):
+        header = arg1
+        steps = arg2
+        error_line = int(arg3) if (arg3 is not None and isinstance(arg3, (int, float))) else None
+    else:
+        error_line = int(arg1) if (arg1 is not None and isinstance(arg1, (int, float))) else None
+        header = arg2 if isinstance(arg2, str) else ""
+        steps = arg3 if isinstance(arg3, list) else []
+
     if error_line is None or not steps:
         return None
 
@@ -613,25 +673,20 @@ def extract_step_features(
     has_wildcard = int("*" in cleaned_step or "_" in cleaned_step or ".." in cleaned_step)
 
     # 4. Lean Compiler Error Alignment (11: has_err_line, dist_to_error_step, signed_dist_to_error_step, is_at_error_step, is_before_error_step, is_after_error_step, and 5 error types)
-    err_step_val = None
-    if compiler_error_line is not None and isinstance(compiler_error_line, (int, float)):
-        # If compiler_error_line exceeds total_steps, it represents a line number in the compiled file;
-        # map it back to the discrete macro-step index (1..total_steps).
-        if compiler_error_line > total_steps and all_steps:
-            mapped = map_error_line_to_step(int(compiler_error_line), header, all_steps)
-            err_step_val = float(mapped) if mapped is not None else float(compiler_error_line)
-        else:
-            err_step_val = float(compiler_error_line)
+    if compiler_error_line is not None and isinstance(compiler_error_line, (int, float)) and compiler_error_line > 0 and all_steps:
+        mapped = map_error_line_to_step(header or "", all_steps, int(compiler_error_line))
+        err_step_val = float(mapped) if mapped is not None else -1.0
+        has_err_line = 1.0 if mapped is not None else 0.0
+    else:
+        err_step_val = -1.0
+        has_err_line = 0.0
 
-    has_err_line = int(err_step_val is not None)
-    err_line_val = err_step_val if has_err_line else -1.0
-
-    if has_err_line:
-        dist_to_error_line = abs(one_based_idx - err_line_val)
-        signed_dist_to_error_line = one_based_idx - err_line_val
-        is_at_error_line = int(one_based_idx == int(round(err_line_val)))
-        is_before_error_line = int(one_based_idx < err_line_val)
-        is_after_error_line = int(one_based_idx > err_line_val)
+    if has_err_line > 0.0:
+        dist_to_error_line = abs(one_based_idx - err_step_val)
+        signed_dist_to_error_line = one_based_idx - err_step_val
+        is_at_error_line = int(one_based_idx == int(round(err_step_val)))
+        is_before_error_line = int(one_based_idx < err_step_val)
+        is_after_error_line = int(one_based_idx > err_step_val)
     else:
         dist_to_error_line = 99.0
         signed_dist_to_error_line = -99.0
@@ -648,7 +703,7 @@ def extract_step_features(
 
     # 5. Global Proof Context Features (3)
     header_char_len = len(header.strip()) if header else 0
-    header_binder_count = header.count("(") if header else 0
+    header_binder_count = len(extract_binders(header)) if header else 0
     prior_have_count = 0
     if all_steps is not None and step_idx > 0:
         prior_have_count = sum(1 for s in all_steps[:step_idx] if "have " in s or "have\t" in s)

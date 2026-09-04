@@ -491,7 +491,7 @@ def main():
                         help="Path to trained XGBoost classifier")
     parser.add_argument("--test_ids_file", type=str, default="data/exp1_test_ids.json",
                         help="Path to held-out test proof records")
-    parser.add_argument("--budgets", nargs="+", type=int, default=[512, 1024, 2048, 4096],
+    parser.add_argument("--budgets", nargs="+", type=int, default=[512, 1024, 4096],
                         help="Budget caps B for Pareto evaluation")
     parser.add_argument("--k_samples", type=int, default=8,
                         help="Suffix sample budget K for labeling (default: 8)")
